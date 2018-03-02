@@ -19,7 +19,7 @@ public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
     // Use this for initialization
     void Start()
     {
-        fireCounter = fireRate;
+        fireCounter = 0;
         ps = this.GetComponentInChildren<ProjectileSpawner>();
         player = GameObject.FindWithTag("Player");
     }
@@ -28,6 +28,10 @@ public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
     void Update()
     {
         Move();
+        if (fireCounter >= (fireRate / 4) && fireCounter < fireRate)
+        {
+            ps.CreateProjectile();
+        }
         if (fireCounter >= fireRate)
         {
             Shoot();

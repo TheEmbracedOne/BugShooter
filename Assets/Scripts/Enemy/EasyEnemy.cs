@@ -20,8 +20,6 @@ public class EasyEnemy : BaseEnemy {
 
     public override void Shoot()
     {
-        //this.transform.Rotate(0, 0, 90, Space.Self);        
-        ps.CreateProjectile();
         ps.Shoot(new Vector2(-1 * direction.y, direction.x), bulletSpeed, "EnemyBullet");
     }
 }

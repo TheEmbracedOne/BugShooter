@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{180303F8-C0BE-DA0C-6C6C-109580680769}</ProjectGuid>
+    <ProjectGuid>{508B376A-30F9-3CA4-ECAA-AB0107FD835D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Enemy\EasyEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemy\MediumEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\SpawnEnemy.cs" />
      <Compile Include="Assets\Scripts\EntityHealth.cs" />
      <Compile Include="Assets\Scripts\Hit.cs" />
