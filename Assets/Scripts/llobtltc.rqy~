@@ -7,11 +7,6 @@ public class ImageCollider : MonoBehaviour {
 
     private GameObject player;
 
-    void Awake()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
-
     static bool AngleBetween(float a, float b, float g)
     {
         if (a <= b)
@@ -103,6 +98,9 @@ public class ImageCollider : MonoBehaviour {
         return returnVector;
     }
     
+	void Update () {
+        player = GameObject.FindWithTag("Player");
+	}
 
     bool isBetween(float value, float border1, float border2)
     {
