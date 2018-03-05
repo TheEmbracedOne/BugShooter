@@ -15,8 +15,6 @@ public class MediumEnemy : BaseEnemy {
     {
         float angle = Mathf.Atan2(player.transform.position.y - this.transform.position.y, player.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
         this.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        Vector2 toPlayer = new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y);
         
         Vector2 movement = new Vector2(this.transform.right.normalized.x + this.transform.up.normalized.x * spiral, this.transform.right.normalized.y + this.transform.up.normalized.y * spiral) * speed;
         this.GetComponent<Rigidbody2D>().velocity = movement;
@@ -25,7 +23,7 @@ public class MediumEnemy : BaseEnemy {
 
     public override void Shoot()
     {      
-        if(previousPosition != null && Vector2.Distance(this.transform.position, previousPosition) < reverseDistance)
+        if(previousPosition != default(Vector2) && Vector2.Distance(this.transform.position, previousPosition) < reverseDistance)
         {
             spiral *= -1;
         }

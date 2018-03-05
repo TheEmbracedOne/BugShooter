@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Enemy\EasyEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemy\HardEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\MediumEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\SpawnEnemy.cs" />
      <Compile Include="Assets\Scripts\EntityHealth.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\SpriteAction.cs" />
      <Compile Include="Assets\Scripts\SpriteCycler.cs" />
      <Compile Include="Assets\Scripts\SpriteCyclerStarter.cs" />
+     <Compile Include="Assets\Scripts\TestScriptDeleteB4Delivery.cs" />
      <Compile Include="Assets\Scripts\UI\CheckValues.cs" />
      <Compile Include="Assets\Scripts\UI\FileDump.cs" />
      <Compile Include="Assets\Scripts\UI\MustHaveValue.cs" />

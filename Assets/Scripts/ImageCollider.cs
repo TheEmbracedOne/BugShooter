@@ -15,12 +15,12 @@ public class ImageCollider : MonoBehaviour {
     static bool AngleBetween(float a, float b, float g)
     {
         if (a <= b)
-            if (b - a <= Mathf.PI)
+            if (b - a <= Mathf.PI) //Why not 180f?
                 return a <= g && g <= b;
             else
                 return b <= g || g <= a;
 
-        if (a - b <= Mathf.PI)
+        if (a - b <= Mathf.PI) //Why not 180f?
             return b <= g && g <= a;
         return a <= g || g <= b;
     }
@@ -37,13 +37,13 @@ public class ImageCollider : MonoBehaviour {
     {
         if (!other.CompareTag("EnemyBullet")) return;
 
-        var direction = -(Vector2)(other.transform.position - transform.position).normalized;
-        var playerAngle = player.transform.eulerAngles.z;
+        Vector2 direction = -(other.transform.position - transform.position).normalized;
+        float playerAngle = player.transform.eulerAngles.z;
 
-        var shield = 24f; // calculate shield size in degrees here
+        float shield = this.GetComponent<PlayerShield>().currentShield * 1.8f; // calculate shield size in degrees here
 
-        var a = playerAngle + shield;
-        var b = playerAngle - shield;
+        float a = playerAngle + shield;
+        float b = playerAngle - shield;
 
         // normalize and convert to radians
         a = NormalizeAngle(a) * Mathf.Deg2Rad;
@@ -51,9 +51,11 @@ public class ImageCollider : MonoBehaviour {
 
         // did it hit our shield?
         if (AngleBetween(a, b, Mathf.Atan2(direction.y, direction.x)))
-            Debug.Log("hit shield!");
-
-        Destroy(other.gameObject);
+        {
+            //Debug.Log("hit shield!"); 
+            Destroy(other.gameObject);
+        }
+            
     }
 
     /*void OnTriggerEnter2D(Collider2D other)
