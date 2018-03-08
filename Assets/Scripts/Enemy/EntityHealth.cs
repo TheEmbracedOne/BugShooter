@@ -11,6 +11,7 @@ public class EntityHealth : MonoBehaviour, DamageTaker
 
     public void takeDamage(int i)
     {
+        //Debug.Log("EntityHealth takeDamage called");
         HealthPoints -= i;
         if (HealthPoints <= 0)
         {

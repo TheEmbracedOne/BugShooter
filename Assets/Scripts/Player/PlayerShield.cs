@@ -6,8 +6,14 @@ using UnityEngine.UI;
 public class PlayerShield : MonoBehaviour, BountyTaker, DamageTaker
 {
     public float ShieldMax;
-    public float currentShield;
-    private Image shield;
+    private float _shield;
+    public float currentShield
+    {
+        get { return _shield; }
+        set { _shield = value; shieldLeft.fillAmount = value / 200; shieldRight.fillAmount = value / 200; }
+    }
+    public Image shieldLeft;
+    public Image shieldRight;
     // if damage done (bounty +1) but no damage taken (bounty -1), get shield + 1 degree
     // if damage taken (bounty -1), shield -3 degree
 
@@ -16,32 +22,25 @@ public class PlayerShield : MonoBehaviour, BountyTaker, DamageTaker
     // if ShieldOn, when facing enemy directon and OnColliderEnter, enemy.destroy
     // if ShieldOn and damage taken (bounty -1), shield -10 degree 
 
+        //PlayerShield -> PlayerShieldSide
+
     public void addBounty(int b)
     {
         if (currentShield < ShieldMax)
         {
+            this.GetComponent<EntityHealth>().healDamage();
             currentShield++;
-            shield.fillAmount = currentShield / 200;
-            this.GetComponentInParent<EntityHealth>().healDamage();
-            //DONE. Now entity health = shield
         }
     }
 
     public void takeDamage()
     {
-        currentShield -= 3;
-        this.GetComponentInParent<EntityHealth>().takeDamage(2); //entity health take damage gets called twice once from here, once as a 'DamageTaker' component.
-        //so 2 here and 1 as DamageTaker = 3.
-        //TODO Test if this works.
-        if (currentShield >= 0)
-        {
-            shield.fillAmount = currentShield / 200;
-        }
+        currentShield -= 1;        
     }
 
     void Start()
     {
-        shield = this.GetComponent<Image>();
-        shield.fillAmount = currentShield / 200;
+        currentShield = this.GetComponent<EntityHealth>().HealthPoints;
     }
+    
 }

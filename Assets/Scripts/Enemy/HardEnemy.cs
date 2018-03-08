@@ -13,7 +13,7 @@ public class HardEnemy : BaseEnemy {
     public float speed;
     public float targetAngle;
     public float dodgingTime;
-
+    public GameObject shootAction;
 
     public void Dodge()
     {
@@ -72,7 +72,8 @@ public class HardEnemy : BaseEnemy {
 
     public override void Shoot()
     {
-
+        foreach (SpriteAction sa in shootAction.GetComponentsInChildren<SpriteAction>()) sa.SetState(true);
+        ps.Shoot(new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y).normalized, bulletSpeed, "EnemyBullet");
     }
 
     private Vector2 GetPlayerDirection()

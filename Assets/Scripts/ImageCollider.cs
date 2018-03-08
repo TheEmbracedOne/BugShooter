@@ -40,7 +40,7 @@ public class ImageCollider : MonoBehaviour {
         Vector2 direction = -(other.transform.position - transform.position).normalized;
         float playerAngle = player.transform.eulerAngles.z;
 
-        float shield = this.GetComponent<PlayerShield>().currentShield * 1.8f; // calculate shield size in degrees here
+        float shield = this.GetComponentInParent<PlayerShield>().currentShield * 1.8f; // calculate shield size in degrees here
 
         float a = playerAngle + shield;
         float b = playerAngle - shield;
