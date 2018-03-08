@@ -5,9 +5,75 @@ using UnityEngine;
 
 public class HardEnemy : BaseEnemy {
     
+    private bool isDodging;
+    private float dodgeTimer;
+
+    public float maximumDistance;
     public float minimumDistance;
     public float speed;
     public float targetAngle;
+    public float dodgingTime;
+
+
+    public void Dodge()
+    {
+        if(dodgeTimer == default(float))
+        {
+            dodgeTimer = 0.0f;
+        }
+        isDodging = true;
+    }
+
+    public override void Move()
+    {
+        Vector2 movement;
+        //Keep the distance or move to designated position
+        if (Vector2.Distance(this.transform.position,player.transform.position) < minimumDistance)
+        {
+            movement = (this.transform.position - player.transform.position).normalized * speed;
+        }
+        else if (isDodging && dodgeTimer != 0.0f)
+        {
+            movement = this.GetComponent<Rigidbody2D>().velocity;
+            dodgeTimer += Time.deltaTime;
+            if (dodgeTimer > dodgingTime)
+            {
+                dodgeTimer = 0.0f;
+                isDodging = false;
+            }
+        }
+        else if(isDodging && dodgeTimer == 0.0f)
+        {
+            Vector2 vectorToPlayer = (player.transform.position - this.transform.position).normalized;
+            
+            Vector2 dodgeLeft =  new Vector2(-vectorToPlayer.y, vectorToPlayer.x) * speed;
+            Vector2 dodgeRight = new Vector2(vectorToPlayer.y, -vectorToPlayer.x) * speed;
+            if (new System.Random().Next(1,100) <= 50)
+                movement = dodgeRight;
+            else
+                movement = dodgeLeft;
+
+            dodgeTimer += Time.deltaTime;
+        }
+        else if(Vector2.Distance(this.transform.position, player.transform.position) > maximumDistance)
+        {
+            movement = (player.transform.position - this.transform.position).normalized * speed;
+        }
+        else
+        {
+            movement = new Vector2(0,0);
+        }
+        this.GetComponent<Rigidbody2D>().velocity = movement;
+        this.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+
+        float angle = Mathf.Atan2(player.transform.position.y - this.transform.position.y, player.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
+        this.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public override void Shoot()
+    {
+
+    }
 
     private Vector2 GetPlayerDirection()
     {
@@ -17,18 +83,18 @@ public class HardEnemy : BaseEnemy {
         float y = x * Mathf.Tan(roundedAngle);
         if (angle <= 90f)
         {
-            
+
             return new Vector2(x, y);
         }
-        if(angle <= 180f)
+        if (angle <= 180f)
         {
             return new Vector2(-y, x);
         }
-        if(angle <= 270f)
+        if (angle <= 270f)
         {
             return new Vector2(-x, -y);
         }
-        if(angle <= 360f)
+        if (angle <= 360f)
         {
             return new Vector2(y, -x);
         }
@@ -44,7 +110,7 @@ public class HardEnemy : BaseEnemy {
 
         // translate point back to origin:
         rotatedPoint.x = point.x - around.x;
-        rotatedPoint.y-= point.y - around.y;
+        rotatedPoint.y -= point.y - around.y;
 
         // rotate point
         float xnew = rotatedPoint.x * cosinusAngle - rotatedPoint.y * sinusAngle;
@@ -54,31 +120,5 @@ public class HardEnemy : BaseEnemy {
         rotatedPoint.x = xnew + around.x;
         rotatedPoint.y = ynew + around.y;
         return rotatedPoint;
-    }
-
-    public override void Move()
-    {
-        Vector2 movement;
-        //Keep the distance or move to designated position
-        if (Vector2.Distance(this.transform.position,player.transform.position) < minimumDistance)
-        {
-            movement = (this.transform.position - player.transform.position).normalized * speed;
-        }
-        else
-        {
-            Vector2 destinationPoint = (GetPlayerDirection().normalized * -1 * minimumDistance);
-        Vector2 rotatedPoint = destinationPoint;//RotatePoint(player.transform.position, targetAngle, destinationPoint);
-            movement = (rotatedPoint - (Vector2)this.transform.position).normalized * speed;
-        }
-        this.GetComponent<Rigidbody2D>().velocity = movement;
-        this.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
-
-        float angle = Mathf.Atan2(player.transform.position.y - this.transform.position.y, player.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(0, 0, angle);
-    }
-
-    public override void Shoot()
-    {
-
     }
 }

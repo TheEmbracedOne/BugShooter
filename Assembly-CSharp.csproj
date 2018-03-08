@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\NoticeBullet.cs" />
      <Compile Include="Assets\Scripts\Bounty\BountyScore.cs" />
      <Compile Include="Assets\Scripts\Bounty\BountyTaker.cs" />
      <Compile Include="Assets\Scripts\BulletTravel.cs" />
@@ -54,10 +55,10 @@
      <Compile Include="Assets\Scripts\Enemy\EasyEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EntityHealth.cs" />
      <Compile Include="Assets\Scripts\Enemy\HardEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\MediumEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\SpawnEnemy.cs" />
-     <Compile Include="Assets\Scripts\EntityHealth.cs" />
      <Compile Include="Assets\Scripts\Hit.cs" />
      <Compile Include="Assets\Scripts\ImageCollider.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerCollisionCheck.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerRotation.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerShield.cs" />
+     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\ProjectileSpawner.cs" />
      <Compile Include="Assets\Scripts\SpriteAction.cs" />
      <Compile Include="Assets\Scripts\SpriteCycler.cs" />

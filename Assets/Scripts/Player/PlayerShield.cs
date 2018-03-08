@@ -18,29 +18,30 @@ public class PlayerShield : MonoBehaviour, BountyTaker, DamageTaker
 
     public void addBounty(int b)
     {
-        if(currentShield < ShieldMax)
+        if (currentShield < ShieldMax)
         {
             currentShield++;
             shield.fillAmount = currentShield / 200;
+            this.GetComponentInParent<EntityHealth>().healDamage();
+            //DONE. Now entity health = shield
         }
     }
 
     public void takeDamage()
     {
-        if (currentShield >= 3)
+        currentShield -= 3;
+        this.GetComponentInParent<EntityHealth>().takeDamage(2); //entity health take damage gets called twice once from here, once as a 'DamageTaker' component.
+        //so 2 here and 1 as DamageTaker = 3.
+        //TODO Test if this works.
+        if (currentShield >= 0)
         {
-            currentShield -= 3;
+            shield.fillAmount = currentShield / 200;
         }
-        else
-        {
-            currentShield = 0;
-        }
-        shield.fillAmount = currentShield / 200;
     }
 
-    void Start () {
+    void Start()
+    {
         shield = this.GetComponent<Image>();
-
         shield.fillAmount = currentShield / 200;
     }
 }
