@@ -9,6 +9,8 @@ public class BountyScore : MonoBehaviour, BountyTaker, DamageTaker
     public void addBounty(int b)
     {
         currentBounty += b;
+        string[] message = { "Gained one bounty", currentBounty.ToString() };
+        FileDump.LogData(message);
     }
 
     public void takeDamage()
@@ -16,6 +18,8 @@ public class BountyScore : MonoBehaviour, BountyTaker, DamageTaker
         if(currentBounty > 0)
         {
             currentBounty--;
+            string[] message = { "Lost one bounty", currentBounty.ToString() };
+            FileDump.LogData(message);
         }
     }
 }

@@ -12,6 +12,16 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool movementState;
 
+    /*void Awake()
+    {
+        FileDump.OpenSession();
+    }*/
+
+    void OnDestroy()
+    {
+        FileDump.CloseSession();
+    }
+
     void Start () {
         diagonalSpeed = Mathf.Sqrt(2) / 2 * speed;
     }
