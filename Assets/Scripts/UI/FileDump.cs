@@ -34,6 +34,7 @@ public class FileDump : MonoBehaviour {
 
             StreamReader idReader = new StreamReader(idFilePath, System.Text.Encoding.UTF8);
             PlayerUniqueID = idReader.ReadLine();
+            
             GetSessionCount();
             CreateSessionFile();
             Debug.Log(PlayerUniqueID);
