@@ -46,11 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\NoticeBullet.cs" />
      <Compile Include="Assets\Scripts\Answer.cs" />
      <Compile Include="Assets\Scripts\Bounty\BountyScore.cs" />
      <Compile Include="Assets\Scripts\Bounty\BountyTaker.cs" />
      <Compile Include="Assets\Scripts\BulletTravel.cs" />
+     <Compile Include="Assets\Scripts\CloseSession.cs" />
      <Compile Include="Assets\Scripts\DamageTaker.cs" />
      <Compile Include="Assets\Scripts\DespawnAny.cs" />
      <Compile Include="Assets\Scripts\Enemy\BaseEnemy.cs" />
@@ -61,8 +61,10 @@
      <Compile Include="Assets\Scripts\Enemy\HardEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\MediumEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\SpawnEnemy.cs" />
+     <Compile Include="Assets\Scripts\FlowController.cs" />
      <Compile Include="Assets\Scripts\Hit.cs" />
      <Compile Include="Assets\Scripts\ImageCollider.cs" />
+     <Compile Include="Assets\Scripts\NoticeBullet.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerCollisionCheck.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerFire.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
@@ -75,12 +77,14 @@
      <Compile Include="Assets\Scripts\SpriteCycler.cs" />
      <Compile Include="Assets\Scripts\SpriteCyclerStarter.cs" />
      <Compile Include="Assets\Scripts\TestScriptDeleteB4Delivery.cs" />
+     <Compile Include="Assets\Scripts\TutorialButtonShot.cs" />
      <Compile Include="Assets\Scripts\UI\CheckValues.cs" />
      <Compile Include="Assets\Scripts\UI\FileDump.cs" />
      <Compile Include="Assets\Scripts\UI\MustHaveValue.cs" />
      <None Include="Assets\233189181226251311871071772153924879208671518421724321119150208219136069953721964112_1.xml" />
      <None Include="Assets\test1.txt" />
      <None Include="Assets\id.txt" />
+     <None Include="Assets\flow.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>P:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class TestScriptDeleteB4Delivery : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        
-	}
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            FlowController.instance.NextFlowState();
+        }
+    }
 }

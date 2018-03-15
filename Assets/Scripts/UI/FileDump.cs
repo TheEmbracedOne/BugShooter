@@ -11,7 +11,9 @@ public class FileDump : MonoBehaviour {
     private string PlayerUniqueID;
     private StreamWriter SessionWriter;
     public static FileDump instance;
-	void Start ()
+    private string sessionFileName;
+
+    void Start ()
     {
         if (instance == default(FileDump))
         {
@@ -37,7 +39,7 @@ public class FileDump : MonoBehaviour {
             
             GetSessionCount();
             CreateSessionFile();
-            Debug.Log(PlayerUniqueID);
+            //Debug.Log(PlayerUniqueID);
 
         }
 
@@ -76,7 +78,7 @@ public class FileDump : MonoBehaviour {
 
     private void CreateSessionFile()
     {
-        string sessionFileName = Application.dataPath + "/" + PlayerUniqueID + "_" + GetSessionCount() + ".xml";
+        sessionFileName = Application.dataPath + "/" + PlayerUniqueID + "_" + GetSessionCount() + ".xml";
         SessionWriter = new StreamWriter(sessionFileName, false, System.Text.Encoding.UTF8);
         SessionWriter.WriteLine("<?xml version=" + '\"' + "1.0" + '\"' + " encoding=" + '\"' + "UTF-8" + '\"' + "?>");
         SessionWriter.WriteLine("<Sessions>");
@@ -104,9 +106,9 @@ public class FileDump : MonoBehaviour {
         return SessionCounter;
     }
 
-    void OnDestroy()
+    public static void CloseSessionFile()
     {
-        SessionWriter.WriteLine("</Sessions>");
-        SessionWriter.Close();
+        instance.SessionWriter.WriteLine("</Sessions>");
+        instance.SessionWriter.Close();
     }
 }
