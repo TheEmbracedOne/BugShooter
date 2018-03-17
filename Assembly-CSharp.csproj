@@ -46,9 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Answer.cs" />
      <Compile Include="Assets\Scripts\Bounty\BountyScore.cs" />
      <Compile Include="Assets\Scripts\Bounty\BountyTaker.cs" />
+     <Compile Include="Assets\Scripts\BulletSplash.cs" />
      <Compile Include="Assets\Scripts\BulletTravel.cs" />
      <Compile Include="Assets\Scripts\CloseSession.cs" />
      <Compile Include="Assets\Scripts\DamageTaker.cs" />
@@ -71,18 +71,23 @@
      <Compile Include="Assets\Scripts\Player\PlayerRotation.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerShield.cs" />
      <Compile Include="Assets\Scripts\ProjectileSpawner.cs" />
-     <Compile Include="Assets\Scripts\Question.cs" />
-     <Compile Include="Assets\Scripts\Questionnare.cs" />
      <Compile Include="Assets\Scripts\SpriteAction.cs" />
      <Compile Include="Assets\Scripts\SpriteCycler.cs" />
      <Compile Include="Assets\Scripts\SpriteCyclerStarter.cs" />
      <Compile Include="Assets\Scripts\TestScriptDeleteB4Delivery.cs" />
-     <Compile Include="Assets\Scripts\TutorialButtonShot.cs" />
+     <Compile Include="Assets\Scripts\Tutorial\ButtonColliderWait.cs" />
+     <Compile Include="Assets\Scripts\Tutorial\TutorialButtonShot.cs" />
+     <Compile Include="Assets\Scripts\Tutorial\TutorialHit.cs" />
+     <Compile Include="Assets\Scripts\Tutorial\TutorialPlayerShield.cs" />
+     <Compile Include="Assets\Scripts\UI\Answer.cs" />
+     <Compile Include="Assets\Scripts\UI\ApplicationQuit.cs" />
      <Compile Include="Assets\Scripts\UI\CheckValues.cs" />
      <Compile Include="Assets\Scripts\UI\FileDump.cs" />
      <Compile Include="Assets\Scripts\UI\MustHaveValue.cs" />
+     <Compile Include="Assets\Scripts\UI\Question.cs" />
+     <Compile Include="Assets\Scripts\UI\Questionnare.cs" />
+     <Compile Include="Assets\Scripts\UI\WriteAnswers.cs" />
      <None Include="Assets\233189181226251311871071772153924879208671518421724321119150208219136069953721964112_1.xml" />
-     <None Include="Assets\test1.txt" />
      <None Include="Assets\id.txt" />
      <None Include="Assets\flow.txt" />
  <Reference Include="UnityEngine.UI">

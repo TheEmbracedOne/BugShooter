@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool movementState;
 
-    void Awake()
+    /*void Awake()
     {
         FileDump.OpenSession();
-    }
+    }*/
 
     void OnDestroy()
     {

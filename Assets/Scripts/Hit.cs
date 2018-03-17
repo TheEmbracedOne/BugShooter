@@ -6,8 +6,9 @@ public class Hit : MonoBehaviour {
 
     public string target;
     public string despawnTarget;
+    public GameObject deathPrefab;
 
-    public Sprite[] destroySpriteArray;
+    /*public Sprite[] destroySpriteArray;
     public float timeInterval; //time between sprite changes
 
     private bool waiting;
@@ -49,5 +50,26 @@ public class Hit : MonoBehaviour {
             this.GetComponent<SpriteRenderer>().sprite = s;
             yield return new WaitForSeconds(1.2f);
         }
+    }*/
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.gameObject.CompareTag(target)) return;
+
+        var damageTakers = other.gameObject.GetComponentsInChildren<DamageTaker>();
+        foreach (DamageTaker dt in damageTakers) dt.takeDamage();
+
+        Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        Instantiate(deathPrefab, transform.position, transform.rotation);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag(despawnTarget)) Destroy(gameObject);
     }
 }
+
