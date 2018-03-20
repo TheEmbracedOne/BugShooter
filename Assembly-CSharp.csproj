@@ -71,6 +71,9 @@
      <Compile Include="Assets\Scripts\Player\PlayerRotation.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerShield.cs" />
      <Compile Include="Assets\Scripts\ProjectileSpawner.cs" />
+     <Compile Include="Assets\Scripts\SpawnScript.cs" />
+     <Compile Include="Assets\Scripts\SpawnScriptHandler.cs" />
+     <Compile Include="Assets\Scripts\SpawnScriptNode.cs" />
      <Compile Include="Assets\Scripts\SpriteAction.cs" />
      <Compile Include="Assets\Scripts\SpriteCycler.cs" />
      <Compile Include="Assets\Scripts\SpriteCyclerStarter.cs" />
@@ -90,6 +93,7 @@
      <None Include="Assets\233189181226251311871071772153924879208671518421724321119150208219136069953721964112_1.xml" />
      <None Include="Assets\id.txt" />
      <None Include="Assets\flow.txt" />
+     <None Include="Assets\example.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>P:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

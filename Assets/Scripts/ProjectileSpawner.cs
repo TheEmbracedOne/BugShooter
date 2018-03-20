@@ -6,6 +6,8 @@ public class ProjectileSpawner : MonoBehaviour
 {
     public Transform preFab;
     public GameObject positionerObject;
+    public AudioClip BulletShootSound;
+    public AudioSource AudioSource;
 
     private Transform bullet;
 
@@ -17,6 +19,7 @@ public class ProjectileSpawner : MonoBehaviour
     public void CreateProjectile()
     {
         CreateProjectile(new Quaternion(0, 0, positionerObject.transform.rotation.z, positionerObject.transform.rotation.w));
+        
     }
 
     public void CreateProjectile(Quaternion pRotation)
@@ -26,6 +29,7 @@ public class ProjectileSpawner : MonoBehaviour
             bullet = Transform.Instantiate(preFab, positionerObject.transform.position, pRotation);
             bullet.transform.SetParent(positionerObject.transform);
             bullet.GetComponent<Collider2D>().enabled = false;
+           
         }
     }
 
@@ -41,5 +45,6 @@ public class ProjectileSpawner : MonoBehaviour
         bullet.tag = tag;
         bullet.GetComponent<Collider2D>().enabled = true;
         bullet = null;
+        //AudioSource.PlayOneShot(BulletShootSound);
     }
 }

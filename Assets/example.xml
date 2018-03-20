@@ -1,0 +1,143 @@
+<SpawnScript>
+	<BountyEnabledSpawning>false</BountyEnabledSpawning>
+	<SpawnScriptNodes>
+	
+		<SpawnScriptNode>
+			<Time>2</Time>
+				<Level>1</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>0</Enemy>
+								<SpawnLocation>0</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>
+		
+		<SpawnScriptNode>
+			<Time>2</Time>
+				<Level>1</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>3</Enemy>
+								<SpawnLocation>3</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>
+
+		<SpawnScriptNode>
+			<Time>2</Time>
+				<Level>1</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>1</Enemy>
+								<SpawnLocation>1</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>		
+		
+	
+		<SpawnScriptNode>
+			<Time>2</Time>
+				<Level>1</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>2</Enemy>
+								<SpawnLocation>2</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>		
+		
+		
+		<SpawnScriptNode>
+			<Time>6</Time>
+				<Level>2</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>4</Enemy>
+								<SpawnLocation>5</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>	
+				
+		<SpawnScriptNode>
+			<Time>15</Time>
+				<Level>3</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>3</Enemy>
+								<SpawnLocation>3</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>
+		
+		<SpawnScriptNode>
+			<Time>1</Time>
+				<Level>3</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>0</Enemy>
+								<SpawnLocation>0</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>	
+		
+		<SpawnScriptNode>
+			<Time>8</Time>
+				<Level>3</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>2</Enemy>
+								<SpawnLocation>2</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>			
+		
+		<SpawnScriptNode>
+			<Time>3</Time>
+				<Level>3</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>1</Enemy>
+								<SpawnLocation>1</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>			
+		
+		
+		
+				<SpawnScriptNode>
+			<Time>1</Time>
+				<Level>3</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>0</Enemy>
+								<SpawnLocation>0</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>	
+		
+		<SpawnScriptNode>
+			<Time>8</Time>
+				<Level>3</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>2</Enemy>
+								<SpawnLocation>2</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>			
+		
+		<SpawnScriptNode>
+			<Time>15</Time>
+				<Level>4</Level>
+					<Spawns>
+						<Spawn>
+							<Enemy>5</Enemy>
+								<SpawnLocation>5</SpawnLocation>
+						</Spawn>
+					</Spawns>
+		</SpawnScriptNode>	
+		
+	</SpawnScriptNodes>
+</SpawnScript>
+				
