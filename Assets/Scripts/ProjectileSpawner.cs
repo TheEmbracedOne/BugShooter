@@ -6,8 +6,7 @@ public class ProjectileSpawner : MonoBehaviour
 {
     public Transform preFab;
     public GameObject positionerObject;
-    public AudioClip BulletShootSound;
-    public AudioSource AudioSource;
+
 
     private Transform bullet;
 
@@ -45,6 +44,6 @@ public class ProjectileSpawner : MonoBehaviour
         bullet.tag = tag;
         bullet.GetComponent<Collider2D>().enabled = true;
         bullet = null;
-        //AudioSource.PlayOneShot(BulletShootSound);
+        
     }
 }

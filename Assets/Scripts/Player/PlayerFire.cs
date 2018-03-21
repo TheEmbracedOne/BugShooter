@@ -6,7 +6,8 @@ public class PlayerFire : MonoBehaviour {
     public float fireRate;
     public float bulletSpeed;
     public GameObject shootAction;
-
+    public AudioClip BulletShootSound;
+    public AudioSource audioSrc;
 
     private float fireCounter;
     private ProjectileSpawner ps;
@@ -27,7 +28,8 @@ public class PlayerFire : MonoBehaviour {
                 Vector3 direction = new Vector3(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y, 0).normalized;
 
                 ps.Shoot(direction, bulletSpeed, "PlayerBullet");
-                
+                audioSrc.PlayOneShot(BulletShootSound);
+
                 fireCounter = 0;
             }
         }

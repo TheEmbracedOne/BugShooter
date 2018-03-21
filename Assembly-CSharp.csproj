@@ -81,11 +81,13 @@
      <Compile Include="Assets\Scripts\Tutorial\ButtonColliderWait.cs" />
      <Compile Include="Assets\Scripts\Tutorial\TutorialButtonShot.cs" />
      <Compile Include="Assets\Scripts\Tutorial\TutorialHit.cs" />
+     <Compile Include="Assets\Scripts\Tutorial\TutorialPlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Tutorial\TutorialPlayerShield.cs" />
      <Compile Include="Assets\Scripts\UI\Answer.cs" />
      <Compile Include="Assets\Scripts\UI\ApplicationQuit.cs" />
      <Compile Include="Assets\Scripts\UI\CheckValues.cs" />
      <Compile Include="Assets\Scripts\UI\FileDump.cs" />
+     <Compile Include="Assets\Scripts\UI\MovingImageonMouseOver.cs" />
      <Compile Include="Assets\Scripts\UI\MustHaveValue.cs" />
      <Compile Include="Assets\Scripts\UI\Question.cs" />
      <Compile Include="Assets\Scripts\UI\Questionnare.cs" />

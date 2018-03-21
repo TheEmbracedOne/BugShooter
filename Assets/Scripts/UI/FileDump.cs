@@ -7,13 +7,14 @@ using UnityEngine.Analytics;
 using System;
 
 public class FileDump : MonoBehaviour {
+    private bool sessionOpen;
     private const string idFileName = "id.txt";
     private string PlayerUniqueID;
     private StreamWriter SessionWriter;
     public static FileDump instance;
     private string sessionFileName;
 
-    void Start ()
+    void Awake ()
     {
         if (instance == default(FileDump))
         {
@@ -39,24 +40,25 @@ public class FileDump : MonoBehaviour {
             
             GetSessionCount();
             CreateSessionFile();
-            //Debug.Log(PlayerUniqueID);
-
+            Debug.Log(PlayerUniqueID);
         }
 
 	}
 	
-    public static void LogData(string[] s)
+    public static void LogData(string[] messageArray)
     {
         instance.SessionWriter.WriteLine("<Entry>");
 
         instance.SessionWriter.Write("<Time>");
         instance.SessionWriter.Write(DateTime.Now.ToLongTimeString());
         instance.SessionWriter.WriteLine("</Time>");
-        foreach (string entry in s)
+        int i = 1;
+        foreach (string entry in messageArray)
         {
-            instance.SessionWriter.Write("<Data>");
-            instance.SessionWriter.Write(s);
-            instance.SessionWriter.WriteLine("</Data>");
+            instance.SessionWriter.Write("<Data" + i + ">");
+            instance.SessionWriter.Write(entry);
+            instance.SessionWriter.WriteLine("</Data" + i + ">");
+            i++;
         }
         instance.SessionWriter.WriteLine("</Entry>");
     }
@@ -69,9 +71,9 @@ public class FileDump : MonoBehaviour {
         instance.SessionWriter.Write(DateTime.Now.ToLongTimeString());
         instance.SessionWriter.WriteLine("</Time>");
 
-        instance.SessionWriter.Write("<Data>");
+        instance.SessionWriter.Write("<Data1>");
         instance.SessionWriter.Write(s);
-        instance.SessionWriter.WriteLine("</Data>");
+        instance.SessionWriter.WriteLine("</Data1>");
 
         instance.SessionWriter.WriteLine("</Entry>");
     }
@@ -86,15 +88,27 @@ public class FileDump : MonoBehaviour {
 
     public static void OpenSession()
     {
+        instance.sessionOpen = true;
+        if (instance == null)
+        {
+            throw new System.NotSupportedException("No FileDump instance!");
+        }
+        if(instance.SessionWriter == null)
+        {
+            throw new System.NotSupportedException("No SessionWriter in FileDump!");
+        }
         instance.SessionWriter.WriteLine("<Session>");
+        instance.SessionWriter.Write("<SessionData>");
         instance.SessionWriter.Write("<SessionDate>");
         instance.SessionWriter.Write(DateTime.Now.ToLongDateString());
         instance.SessionWriter.WriteLine("</SessionDate>");
+        instance.SessionWriter.Write("</SessionData>");
         instance.SessionWriter.WriteLine("<Entries>");
     }
 
     public static void CloseSession()
     {
+        instance.sessionOpen = false;
         instance.SessionWriter.WriteLine("</Entries>");
         instance.SessionWriter.WriteLine("</Session>");
     }
@@ -108,6 +122,7 @@ public class FileDump : MonoBehaviour {
 
     public static void CloseSessionFile()
     {
+        if (instance.sessionOpen) { CloseSession(); }
         instance.SessionWriter.WriteLine("</Sessions>");
         instance.SessionWriter.Close();
     }
