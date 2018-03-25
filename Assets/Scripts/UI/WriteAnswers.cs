@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 public class WriteAnswers : MonoBehaviour {
 
-    public GameObject Question;
+    public Text AnswerText;
+    private Questionnare questionnare;
 
-    public void Submit()
+    private string qText;
+    private string aText;
+
+    void Start()
     {
-        string qFile = Application.dataPath + "/qFile.txt";
-        StreamWriter questionnaireFiller = new StreamWriter(qFile, true, System.Text.Encoding.UTF8);
+        questionnare = GetComponentInParent<Questionnare>();
+        this.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Submit);
+        qText = this.GetComponentInParent<Question>().QuestionText;
+    }
 
-        foreach(Text t in Question.GetComponentsInChildren<Text>())
-        {
-            questionnaireFiller.WriteLine(t.text);
-        }
+    void Update()
+    {
+        aText = AnswerText.text;
+    }
 
-        questionnaireFiller.Close();
+    void Submit()
+    {
+        questionnare.LogEntry(qText);
+        questionnare.LogEntry(aText);
     }
 }

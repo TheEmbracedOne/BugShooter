@@ -28,7 +28,7 @@ public class PlayerFire : MonoBehaviour {
                 Vector3 direction = new Vector3(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y, 0).normalized;
 
                 ps.Shoot(direction, bulletSpeed, "PlayerBullet");
-                audioSrc.PlayOneShot(BulletShootSound);
+                //audioSrc.PlayOneShot(BulletShootSound);
 
                 fireCounter = 0;
             }

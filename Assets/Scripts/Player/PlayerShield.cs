@@ -14,16 +14,6 @@ public class PlayerShield : MonoBehaviour, BountyTaker, DamageTaker
     }
     public Image shieldLeft;
     public Image shieldRight;
-    // if damage done (bounty +1) but no damage taken (bounty -1), get shield + 1 degree
-    // if damage taken (bounty -1), shield -3 degree
-
-
-    // if shield ShieldMax, gain ShieldOn
-    // if ShieldOn, when facing enemy directon and OnColliderEnter, enemy.destroy
-    // if ShieldOn and damage taken (bounty -1), shield -10 degree 
-
-        //PlayerShield -> PlayerShieldSide
-
     public void addBounty(int b)
     {
         if (currentShield < ShieldMax)

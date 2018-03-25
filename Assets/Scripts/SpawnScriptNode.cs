@@ -9,12 +9,17 @@ public class SpawnScriptNode
 	[XmlElement("Time")]
 	public float time;
 
-	[XmlElement("Level")]
-	public int level;
-
-	[XmlArray("Spawns")]
-	[XmlArrayItem("Spawn")]
-	public List<Spawn> spawns = new List<Spawn>();
+	[XmlArray("Levels")]
+    [XmlArrayItem("Level")]
+	public List<Level> levels;
+    
+    [XmlRoot("Levels")]
+    public partial class Level
+    {
+        [XmlArray("Spawns")]
+        [XmlArrayItem("Spawn")]
+        public List<Spawn> spawns = new List<Spawn>();
+    }
 
     [XmlRoot("Spawns")]
     public partial class Spawn

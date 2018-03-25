@@ -2,15 +2,28 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlowController : MonoBehaviour {
 
-    private FlowState flow;
+    private FlowState _flowState;
+    public FlowState flow
+    {
+        get { return _flowState; }
+        set
+        {
+            flowObjects[(int)instance.flow].SetActive(false);
+            _flowState = value;
+            flowObjects[(int)instance.flow].SetActive(true);
+            
+        }
+    }
+    
     public GameObject[] flowObjects;
 
     public static FlowController instance;
 
-    void Awake()
+    public void Awake()
     {
         if(instance == null)
         {
@@ -49,8 +62,6 @@ public class FlowController : MonoBehaviour {
     public void NextFlowState()
     {
         if (flow == FlowState.AfterGame) { return; }
-        flowObjects[(int)instance.flow].SetActive(false);
-        flowObjects[(int)instance.flow + 1].SetActive(true);
         flow = (FlowState)((int)flow + 1);
         SaveFlowState();
     }
@@ -76,9 +87,20 @@ public class FlowController : MonoBehaviour {
         StreamReader sr = new StreamReader(flowFile, System.Text.Encoding.UTF8);
         instance.flow = (FlowState)int.Parse(sr.ReadLine());
         sr.Close();
+        
+        string qFileName = flowObjects[(int)FlowState.PostPlayQuestionsStatic].GetComponent<Questionnare>().QuestionnareName;
+        if (instance.flow < FlowState.DynamicPlay)
+        {
+            File.Delete(Application.dataPath + "/" + qFileName);
+        }
+        qFileName = flowObjects[(int)FlowState.PostPlayQuestionsDynamic].GetComponent<Questionnare>().QuestionnareName;
+        if (instance.flow < FlowState.AfterGame)
+        {
+            File.Delete(Application.dataPath + "/" + qFileName);
+        }
     }
 
-    private void ActivateFlowState()
+    public void ActivateFlowState()
     {
         flowObjects[(int)instance.flow].SetActive(true);
     }

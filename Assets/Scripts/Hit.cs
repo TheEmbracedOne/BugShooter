@@ -17,7 +17,6 @@ public class Hit : MonoBehaviour {
             DamageTaker[] damageTakers = other.gameObject.GetComponentsInChildren<DamageTaker>();
             foreach (DamageTaker dt in damageTakers) dt.takeDamage();
             Instantiate(deathPrefab, this.transform.position, this.transform.rotation);
-            Debug.Log("object instantiated");
             Destroy(gameObject);
         }
         

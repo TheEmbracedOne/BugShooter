@@ -9,7 +9,7 @@ public class BountyScore : MonoBehaviour, BountyTaker, DamageTaker
     public void addBounty(int b)
     {
         currentBounty += b;
-        string[] message = { "Gained " + b + " bounty", currentBounty.ToString() };
+        string[] message = { "Gained " + b + " bounty", "B" + currentBounty.ToString(), "L" + SpawnScriptHandler.currentLevel.ToString()};
         FileDump.LogData(message);
     }
 

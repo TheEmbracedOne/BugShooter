@@ -1,14 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Answer : MonoBehaviour {
     public string AnswerText;       //Answer to be filled here manually in-editor
-	
-    public void OnAnswerSelect()
+
+    private string question;
+
+    public void Start()
+    {
+        question = GetComponentInParent<Question>().QuestionText;
+        Button b = this.GetComponent<Button>();
+        b.onClick.AddListener(OnAnswerSelect);
+    }
+
+    void OnAnswerSelect()
     {
         //Dump question
-        string dumpthis = this.GetComponentInParent<Question>().QuestionText;
+        GetComponentInParent<Questionnare>().LogEntry(question);
         //Dump answer
+        GetComponentInParent<Questionnare>().LogEntry(AnswerText);
     }
 }

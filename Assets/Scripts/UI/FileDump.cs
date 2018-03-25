@@ -44,6 +44,11 @@ public class FileDump : MonoBehaviour {
         }
 
 	}
+
+    public string GetPlayerID()
+    {
+        return PlayerUniqueID;
+    }
 	
     public static void LogData(string[] messageArray)
     {
@@ -86,7 +91,7 @@ public class FileDump : MonoBehaviour {
         SessionWriter.WriteLine("<Sessions>");
     }
 
-    public static void OpenSession()
+    public static void OpenSession(string isStaticLevel)
     {
         instance.sessionOpen = true;
         if (instance == null)
@@ -102,6 +107,9 @@ public class FileDump : MonoBehaviour {
         instance.SessionWriter.Write("<SessionDate>");
         instance.SessionWriter.Write(DateTime.Now.ToLongDateString());
         instance.SessionWriter.WriteLine("</SessionDate>");
+        instance.SessionWriter.WriteLine("<SessionStaticPlay>");
+        instance.SessionWriter.WriteLine(isStaticLevel.ToString());
+        instance.SessionWriter.WriteLine("</SessionStaticPlay>");
         instance.SessionWriter.Write("</SessionData>");
         instance.SessionWriter.WriteLine("<Entries>");
     }
@@ -116,7 +124,7 @@ public class FileDump : MonoBehaviour {
     private int GetSessionCount()
     {
         int SessionCounter;
-        for (SessionCounter = 1; File.Exists(Application.dataPath + "/" + PlayerUniqueID + "_" + SessionCounter + ".txt"); SessionCounter++) ;
+        for (SessionCounter = 1; File.Exists(Application.dataPath + "/" + PlayerUniqueID + "_" + SessionCounter + ".xml"); SessionCounter++) ;
         return SessionCounter;
     }
 
@@ -124,6 +132,7 @@ public class FileDump : MonoBehaviour {
     {
         if (instance.sessionOpen) { CloseSession(); }
         instance.SessionWriter.WriteLine("</Sessions>");
+        instance.SessionWriter.Dispose();
         instance.SessionWriter.Close();
     }
 }

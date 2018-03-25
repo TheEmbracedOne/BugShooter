@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Start () {
-        FileDump.OpenSession();
+        string isStatic = this.GetComponentInParent<SpawnScriptHandler>().bountyBased.ToString();
+        FileDump.OpenSession(isStatic);
         diagonalSpeed = Mathf.Sqrt(2) / 2 * speed;
     }
 

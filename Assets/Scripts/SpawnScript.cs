@@ -7,10 +7,7 @@ using System.Collections.Generic;
 
 [XmlRoot("SpawnScript")]
 public class SpawnScript 
-{
-	[XmlElement("BasedOnBounty")]
-	public bool bountyBase;
-  
+{  
     [XmlArray("SpawnScriptNodes")]
 	[XmlArrayItem("SpawnScriptNode")]
 	public List<SpawnScriptNode> nodes = new List<SpawnScriptNode>();
