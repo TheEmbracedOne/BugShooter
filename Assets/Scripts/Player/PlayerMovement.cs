@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDestroy()
     {
+        //OnGameOver();
         FileDump.CloseSession();
     }
 

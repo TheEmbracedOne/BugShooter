@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ImageCollider : MonoBehaviour {
 
     private GameObject player;
-    public AudioClip ShieldSplash;
-    public AudioSource audioSrc;
+    //public AudioClip ShieldSplash;
+    //public AudioSource audioSrc;
 
     void Awake()
     {
@@ -55,7 +55,7 @@ public class ImageCollider : MonoBehaviour {
         if (AngleBetween(a, b, Mathf.Atan2(direction.y, direction.x)))
         {
             //Debug.Log("hit shield!"); 
-            this.GetComponentInParent<AudioSource>().PlayOneShot(ShieldSplash);
+            //this.GetComponentInParent<AudioSource>().PlayOneShot(ShieldSplash);
             Destroy(other.gameObject);
         }
             

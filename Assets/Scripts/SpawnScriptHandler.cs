@@ -58,41 +58,59 @@ public class SpawnScriptHandler : MonoBehaviour {
 
 	}
 
-    private int CalculateLevel()
-    {
-        if (bountyBased == false)
+    /*    private int CalculateLevel()
         {
-            return (maxDifficultyLevel / 2);
-        }
-
-        int cBounty = GameObject.FindGameObjectWithTag("Player").GetComponent<BountyScore>().currentBounty;
-        //float cTime = spawnXml.nodes[nodeCounter].time;
-        int bountyDifference = cBounty - previousBounty; //pl. 20 - 17 = +3 bounty
-        previousBounty = cBounty;
-    
-        //calculate dynamic difficulty quotient
-        //return (int)(bountyDifference / cTime);
-
-        //VeryHighSkill, max difficulty
-        if (bountyDifference > 50) {
-            return maxDifficultyLevel;
-        }
-        //HighSkill, +1 difficulty
-        if (bountyDifference > 20) {
-            if (currentLevel < maxDifficultyLevel) //need to ensure it does not exceed max difficulty
+            if (bountyBased == false)
             {
-                return (currentLevel + 1);
+                return (maxDifficultyLevel / 2);
             }
-        }
-        //NormalSkill, same difficulty
-        if (bountyDifference > 0) {   //between 0 and 20
-           return currentLevel;
-        }
-        //LowSkill, -1 difficulty
-        if (currentLevel > 0)
-        {
-            return currentLevel - 1;  //need to ensure it does not go lower than min difficulty
-        }
-        return currentLevel;
+
+            int cBounty = GameObject.FindGameObjectWithTag("Player").GetComponent<BountyScore>().currentBounty;
+            //float cTime = spawnXml.nodes[nodeCounter].time;
+            int bountyDifference = cBounty - previousBounty; //pl. 20 - 17 = +3 bounty
+            previousBounty = cBounty;
+
+            //calculate dynamic difficulty quotient
+            //return (int)(bountyDifference / cTime);
+
+            //VeryHighSkill, max difficulty
+            if (bountyDifference > 50) {
+                return maxDifficultyLevel;
+            }
+            //HighSkill, +1 difficulty
+            if (bountyDifference > 20) {
+                if (currentLevel < maxDifficultyLevel) //need to ensure it does not exceed max difficulty
+                {
+                    return (currentLevel + 1);
+                }
+            }
+            //NormalSkill, same difficulty
+            if (bountyDifference > 0) {   //between 0 and 20
+               return currentLevel;
+            }
+            //LowSkill, -1 difficulty
+            if (currentLevel > 0)
+            {
+                return currentLevel - 1;  //need to ensure it does not go lower than min difficulty
+            }
+            return currentLevel;
+        }*/
+
+    int CalculateLevel()
+    {
+        if (!bountyBased) return maxDifficultyLevel / 2;
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        var bscore = player.GetComponent<BountyScore>();
+
+        int currentBounty = bscore.currentBounty;
+        int difference = currentBounty - previousBounty;
+        previousBounty = currentBounty;
+
+        if (difference > 50) return maxDifficultyLevel;
+        else if (difference > 20 && currentLevel < maxDifficultyLevel) return currentLevel + 1;
+        else if (difference > 0) return currentLevel;
+
+        return currentLevel > 0 ? currentLevel - 1 : currentLevel;
     }
 }

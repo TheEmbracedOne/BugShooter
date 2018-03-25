@@ -41,7 +41,7 @@ public class SpawnEnemy : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("F1");
+            //Debug.Log("F1");
             EnemySpawner.spawn(enemy, spawnPoint.position);
         }
     }

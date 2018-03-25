@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class FlowController : MonoBehaviour {
 
-    private FlowState _flowState;
+    public FlowState _flowState;
+
     public FlowState flow
     {
         get { return _flowState; }
         set
         {
+            Debug.LogFormat("set flow {0}", value);
+            Debug.Log(System.Environment.StackTrace);
+
             flowObjects[(int)instance.flow].SetActive(false);
             _flowState = value;
             flowObjects[(int)instance.flow].SetActive(true);
@@ -66,7 +71,7 @@ public class FlowController : MonoBehaviour {
         SaveFlowState();
     }
 
-    private void SaveFlowState()
+    public void SaveFlowState()
     {
         if (instance.flow == FlowState.PostPlayQuestionsDynamic || instance.flow == FlowState.PostPlayQuestionsStatic) { return; }
         string flowFile = Application.dataPath + "/flow.txt";

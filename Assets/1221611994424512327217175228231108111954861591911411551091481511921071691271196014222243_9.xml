@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Sessions>
+<Entry>
+<Time>4:26:10 PM</Time>
+<Data1>Gained 1 bounty</Data1>
+<Data2>B1</Data2>
+<Data3>L0</Data3>
+</Entry>
+<Entry>
+<Time>4:26:12 PM</Time>
+<Data1>Gained 1 bounty</Data1>
+<Data2>B2</Data2>
+<Data3>L0</Data3>
+</Entry>
+<Entry>
+<Time>4:26:13 PM</Time>
+<Data1>Lost 1 bounty</Data1>
+<Data2>1</Data2>
+</Entry>
+<Entry>
+<Time>4:26:14 PM</Time>
+<Data1>Gained 1 bounty</Data1>
+<Data2>B2</Data2>
+<Data3>L0</Data3>
+</Entry>
+<Session>
+<SessionData><SessionDate>Sunday, March 25, 2018</SessionDate>
+<SessionStaticPlay>
+False
+</SessionStaticPlay>
+</SessionData><Entries>
+<Entry>
+<Time>4:26:27 PM</Time>
+<Data1>Gained 1 bounty</Data1>
+<Data2>B1</Data2>
+<Data3>L1</Data3>
+</Entry>
+<Entry>
+<Time>4:26:27 PM</Time>
+<Data1>Lost 1 bounty</Data1>
+<Data2>0</Data2>
+</Entry>
+<Entry>
+<Time>4:26:28 PM</Time>
+<Data1>Gained 1 bounty</Data1>
+<Data2>B1</Data2>
+<Data3>L1</Data3>
+</Entry>
+<Entry>
+<Time>4:26:28 PM</Time>
+<Data1>Gained 1 bounty</Data1>
+<Data2>B2</Data2>
+<Data3>L1</Data3>
+</Entry>
+<Entry>
+<Time>4:26:28 PM</Time>
+<Data1>Gained 1 bounty</Data1>
+<Data2>B3</Data2>
+<Data3>L1</Data3>
+</Entry>
+<Entry>
+<Time>4:26:29 PM</Time>
+<Data1>Lost 1 bounty</Data1>
+<Data2>2</Data2>
+</Entry>
+<Entry>
+<Time>4:26:29 PM</Time>
+<Data1>Lost 1 bounty</Data1>
+<Data2>1</Data2>
+</Entry>
+<Entry>
+<Time>4:26:29 PM</Time>
+<Data1>Lost 1 bounty</Data1>
+<Data2>0</Data2>
+</Entry>
+</Entries>
+</Session>
+<Entry>
+<Time>4:26:33 PM</Time>
+<Data1>Gained 5 bounty</Data1>
+<Data2>B7</Data2>
+<Data3>L1</Data3>
+</Entry>
+<Entry>
+<Time>4:26:33 PM</Time>
+<Data1>Gained 15 bounty</Data1>
+<Data2>B22</Data2>
+<Data3>L1</Data3>
+</Entry>
+<Entry>
+<Time>4:26:33 PM</Time>
+<Data1>Gained 20 bounty</Data1>
+<Data2>B42</Data2>
+<Data3>L1</Data3>
+</Entry>
+</Sessions>

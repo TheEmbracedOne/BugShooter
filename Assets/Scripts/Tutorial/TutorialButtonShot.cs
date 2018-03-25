@@ -14,7 +14,7 @@ public class TutorialButtonShot : MonoBehaviour {
             Destroy(other.gameObject);
             HitTarget.SetActive(false);
             NextUp.SetActive(true);
-            Debug.Log("Button shot");
+            //Debug.Log("Button shot");
         }
     }
 

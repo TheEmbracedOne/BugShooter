@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScriptDeleteB4Delivery : MonoBehaviour {
+public class TestScriptDeleteB4Delivery : MonoBehaviour
+{
 
-    void Update()
+    void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.F9))
-        {
-            FlowController.instance.NextFlowState();
-        }
+        FlowController.instance.NextFlowState();
+        /* if (Input.GetKeyDown(KeyCode.F9))
+         {
+
+         }
+     }*/
     }
 }
