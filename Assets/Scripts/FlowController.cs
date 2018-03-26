@@ -14,9 +14,6 @@ public class FlowController : MonoBehaviour {
         get { return _flowState; }
         set
         {
-            Debug.LogFormat("set flow {0}", value);
-            Debug.Log(System.Environment.StackTrace);
-
             flowObjects[(int)instance.flow].SetActive(false);
             _flowState = value;
             flowObjects[(int)instance.flow].SetActive(true);
@@ -69,6 +66,7 @@ public class FlowController : MonoBehaviour {
         if (flow == FlowState.AfterGame) { return; }
         flow = (FlowState)((int)flow + 1);
         SaveFlowState();
+        GameOverScreen.deathCount = 0;
     }
 
     public void SaveFlowState()

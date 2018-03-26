@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class TutorialButtonShot : MonoBehaviour {
 
-    public GameObject HitTarget;
-    public GameObject NextUp;
-
+    public GameObject flowController;
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("PlayerBullet"))
         {
             Destroy(other.gameObject);
-            HitTarget.SetActive(false);
-            NextUp.SetActive(true);
+            flowController.GetComponent<FlowController>().NextFlowState();
             //Debug.Log("Button shot");
         }
     }

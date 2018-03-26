@@ -14,6 +14,8 @@ public class FileDump : MonoBehaviour {
     public static FileDump instance;
     private string sessionFileName;
 
+    private bool hasEntry;
+
     void Awake ()
     {
         if (instance == default(FileDump))
@@ -40,7 +42,6 @@ public class FileDump : MonoBehaviour {
             
             GetSessionCount();
             CreateSessionFile();
-            Debug.Log(PlayerUniqueID);
         }
 
 	}
@@ -52,43 +53,47 @@ public class FileDump : MonoBehaviour {
 	
     public static void LogData(string[] messageArray)
     {
-        instance.SessionWriter.WriteLine("<Entry>");
+        if (instance.hasEntry) { instance.SessionWriter.WriteLine(","); }
+        else { instance.hasEntry = true; }
+        instance.SessionWriter.WriteLine("{");
 
-        instance.SessionWriter.Write("<Time>");
-        instance.SessionWriter.Write(DateTime.Now.ToLongTimeString());
-        instance.SessionWriter.WriteLine("</Time>");
+        instance.SessionWriter.Write("\"Time\": ");
+        instance.SessionWriter.Write("\"" + DateTime.Now.ToLongTimeString() + "\"");
+        instance.SessionWriter.WriteLine(",");
         int i = 1;
         foreach (string entry in messageArray)
         {
-            instance.SessionWriter.Write("<Data" + i + ">");
-            instance.SessionWriter.Write(entry);
-            instance.SessionWriter.WriteLine("</Data" + i + ">");
+            instance.SessionWriter.Write("\"Data" + i + "\": ");
+            instance.SessionWriter.Write("\"" + entry + "\"");
+            if (i < messageArray.Length) instance.SessionWriter.WriteLine(",");
+            else instance.SessionWriter.WriteLine();
             i++;
         }
-        instance.SessionWriter.WriteLine("</Entry>");
+        instance.SessionWriter.Write("}");
     }
 
     public static void LogData(string s)
     {
-        instance.SessionWriter.WriteLine("<Entry>");
+        if (instance.hasEntry) { instance.SessionWriter.WriteLine(","); }
+        else { instance.hasEntry = true; }
+        instance.SessionWriter.WriteLine("{");
 
-        instance.SessionWriter.Write("<Time>");
-        instance.SessionWriter.Write(DateTime.Now.ToLongTimeString());
-        instance.SessionWriter.WriteLine("</Time>");
+        instance.SessionWriter.Write("\"Time\": ");
+        instance.SessionWriter.Write("\"" + DateTime.Now.ToLongTimeString() + "\"");
+        instance.SessionWriter.WriteLine(",");
 
-        instance.SessionWriter.Write("<Data1>");
-        instance.SessionWriter.Write(s);
-        instance.SessionWriter.WriteLine("</Data1>");
+        instance.SessionWriter.Write("\"Data1\": ");
+        instance.SessionWriter.WriteLine("\"" + s + "\"");
 
-        instance.SessionWriter.WriteLine("</Entry>");
+        instance.SessionWriter.Write("}");
     }
 
     private void CreateSessionFile()
     {
-        sessionFileName = Application.dataPath + "/" + PlayerUniqueID + "_" + GetSessionCount() + ".xml";
+        sessionFileName = Application.dataPath + "/" + PlayerUniqueID + "_" + GetSessionCount() + ".json";
         SessionWriter = new StreamWriter(sessionFileName, false, System.Text.Encoding.UTF8);
-        SessionWriter.WriteLine("<?xml version=" + '\"' + "1.0" + '\"' + " encoding=" + '\"' + "UTF-8" + '\"' + "?>");
-        SessionWriter.WriteLine("<Sessions>");
+        
+        SessionWriter.WriteLine("\"Sessions\": {");
     }
 
     public static void OpenSession(string isStaticLevel)
@@ -102,36 +107,40 @@ public class FileDump : MonoBehaviour {
         {
             throw new System.NotSupportedException("No SessionWriter in FileDump!");
         }
-        instance.SessionWriter.WriteLine("<Session>");
-        instance.SessionWriter.Write("<SessionData>");
-        instance.SessionWriter.Write("<SessionDate>");
-        instance.SessionWriter.Write(DateTime.Now.ToLongDateString());
-        instance.SessionWriter.WriteLine("</SessionDate>");
-        instance.SessionWriter.WriteLine("<SessionStaticPlay>");
-        instance.SessionWriter.WriteLine(isStaticLevel.ToString());
-        instance.SessionWriter.WriteLine("</SessionStaticPlay>");
-        instance.SessionWriter.Write("</SessionData>");
-        instance.SessionWriter.WriteLine("<Entries>");
+        instance.SessionWriter.WriteLine("\"Session\": {");
+        instance.SessionWriter.WriteLine("\"SessionData\": {");
+        instance.SessionWriter.Write("\"SessionDate\": ");
+        instance.SessionWriter.Write("\"" + DateTime.Now.ToLongDateString() + "\"");
+        instance.SessionWriter.WriteLine(",");
+        instance.SessionWriter.Write("\"SessionStaticPlay\": ");
+        instance.SessionWriter.Write("\"" + isStaticLevel.ToString() + "\"");
+        instance.SessionWriter.WriteLine(",");
+        instance.SessionWriter.WriteLine("},");
+        instance.SessionWriter.WriteLine("\"Entries\": {");
+        instance.SessionWriter.WriteLine("\"Entry\": [");
+        instance.hasEntry = false;
     }
 
     public static void CloseSession()
     {
+        if (instance.hasEntry) { instance.SessionWriter.WriteLine(); }
         instance.sessionOpen = false;
-        instance.SessionWriter.WriteLine("</Entries>");
-        instance.SessionWriter.WriteLine("</Session>");
+        instance.SessionWriter.WriteLine("]");
+        instance.SessionWriter.WriteLine("}");
+        instance.SessionWriter.WriteLine("}");
     }
 
     private int GetSessionCount()
     {
         int SessionCounter;
-        for (SessionCounter = 1; File.Exists(Application.dataPath + "/" + PlayerUniqueID + "_" + SessionCounter + ".xml"); SessionCounter++) ;
+        for (SessionCounter = 1; File.Exists(Application.dataPath + "/" + PlayerUniqueID + "_" + SessionCounter + ".json"); SessionCounter++) ;
         return SessionCounter;
     }
 
     public static void CloseSessionFile()
     {
         if (instance.sessionOpen) { CloseSession(); }
-        instance.SessionWriter.WriteLine("</Sessions>");
+        instance.SessionWriter.WriteLine("}");
         instance.SessionWriter.Dispose();
         instance.SessionWriter.Close();
     }

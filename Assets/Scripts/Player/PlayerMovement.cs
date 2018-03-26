@@ -14,8 +14,10 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDestroy()
     {
-        //OnGameOver();
-        FileDump.CloseSession();
+        if (this.GetComponent<EntityHealth>().HealthPoints <= 0)
+        {
+            FileDump.CloseSession();
+        }
     }
 
     void Start () {

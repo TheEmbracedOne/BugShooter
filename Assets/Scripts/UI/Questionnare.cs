@@ -12,17 +12,19 @@ public class Questionnare : MonoBehaviour {
 
     void Start()
     {
-        string qFile = Application.dataPath + "/" + QuestionnareName;
+        string qFile = Application.dataPath + "/" + QuestionnareName + ".json";
         isQuestionnareFilled = File.Exists(qFile);
         if (isQuestionnareFilled) return;
         qWriter = new StreamWriter(qFile, false, System.Text.Encoding.UTF8);
-        qWriter.WriteLine(FileDump.instance.GetPlayerID());
+        qWriter.Write("\"" + QuestionnareName + "\" : ");
+        qWriter.Write(FileDump.instance.GetPlayerID());
+        qWriter.Write(" ,");
     }
 
 	public void LogEntry(string entry)
     {
         if (isQuestionnareFilled || qWriter == default(StreamWriter)) return;
-        qWriter.WriteLine(entry);
+        qWriter.Write("\"" + entry + "\"" + " , ");
     }
 
     void OnDisable()

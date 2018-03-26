@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(ProjectileSpawner))]
+[RequireComponent(typeof(EntityHealth))]
 public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
 {
     public float bulletSpeed;
@@ -55,13 +56,16 @@ public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
         }
     }
 
-    void OnDestroy()
+    void OnDestroy() 
     {
-        if (player != null)
+        if (GetComponent<EntityHealth>().HealthPoints <= 0)
         {
-            foreach (BountyTaker bt in player.gameObject.GetComponentsInChildren<BountyTaker>())
+            if (player != null)
             {
-                bt.addBounty(bounty);
+                foreach (BountyTaker bt in player.gameObject.GetComponentsInChildren<BountyTaker>())
+                {
+                    bt.addBounty(bounty);
+                }
             }
         }
     }
