@@ -9,12 +9,8 @@ public class GameOver : MonoBehaviour {
     {
         FlowController.instance.SaveFlowState();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-
         //FlowController.instance.SetFlowState;
-
         //File.WriteAllText(Path.Combine(Application.dataPath, "flow.txt"), instance.flow.ToString());
-
-    }
+     }
 }
 
