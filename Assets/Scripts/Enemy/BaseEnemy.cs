@@ -47,13 +47,7 @@ public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
 
     public void takeDamage()
     {
-        if (player != null)
-        {
-            foreach (BountyTaker bt in player.gameObject.GetComponentsInChildren<BountyTaker>())
-            {
-                bt.addBounty(1);
-            }
-        }
+        takeDamage(1);
     }
 
     void OnDestroy() 
@@ -66,6 +60,17 @@ public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
                 {
                     bt.addBounty(bounty);
                 }
+            }
+        }
+    }
+
+    public void takeDamage(int dmg)
+    {
+        if (player != null)
+        {
+            foreach (BountyTaker bt in player.gameObject.GetComponentsInChildren<BountyTaker>())
+            {
+                bt.addBounty(dmg);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,5 +33,9 @@ public class PlayerShield : MonoBehaviour, BountyTaker, DamageTaker
     {
         currentShield = this.GetComponent<EntityHealth>().HealthPoints;
     }
-    
+
+    public void takeDamage(int dmg)
+    {
+        currentShield -= dmg;
+    }
 }

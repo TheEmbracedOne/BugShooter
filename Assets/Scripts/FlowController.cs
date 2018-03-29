@@ -48,7 +48,8 @@ public class FlowController : MonoBehaviour {
         PostPlayQuestionsStatic,
         DynamicPlay,
         PostPlayQuestionsDynamic,
-        AfterGame
+        PostPlayQuestionsDual,
+        AfterGame,
     }
 
     public FlowState GetFlowState()
@@ -61,9 +62,15 @@ public class FlowController : MonoBehaviour {
         instance.flow = state;
     }
 
+    public void SetFlowState(int state)
+    {
+        instance.flow = (FlowState)state;
+    }
+
     public void NextFlowState()
     {
         if (flow == FlowState.AfterGame) { return; }
+        if(flow == FlowState.PostPlayQuestionsDual) { FileDump.CloseSessionFile(); }
         flow = (FlowState)((int)flow + 1);
         SaveFlowState();
         GameOverScreen.deathCount = 0;
@@ -73,7 +80,7 @@ public class FlowController : MonoBehaviour {
     {
         if (instance.flow == FlowState.PostPlayQuestionsDynamic || instance.flow == FlowState.PostPlayQuestionsStatic) { return; }
         string flowFile = Application.dataPath + "/flow.txt";
-        StreamWriter sw = new StreamWriter(flowFile, false, System.Text.Encoding.UTF8);
+        StreamWriter sw = new StreamWriter(flowFile, false, System.Text.Encoding.ASCII);
         sw.WriteLine((int)instance.flow);
         sw.Close();
     }
@@ -83,11 +90,11 @@ public class FlowController : MonoBehaviour {
         string flowFile = Application.dataPath + "/flow.txt";
         if(!File.Exists(flowFile))
         {
-            StreamWriter sw = new StreamWriter(flowFile, false, System.Text.Encoding.UTF8);
+            StreamWriter sw = new StreamWriter(flowFile, false, System.Text.Encoding.ASCII);
             sw.WriteLine("0");
             sw.Close();
         }
-        StreamReader sr = new StreamReader(flowFile, System.Text.Encoding.UTF8);
+        StreamReader sr = new StreamReader(flowFile, System.Text.Encoding.ASCII);
         instance.flow = (FlowState)int.Parse(sr.ReadLine());
         sr.Close();
         

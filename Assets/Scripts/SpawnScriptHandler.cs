@@ -41,8 +41,8 @@ public class SpawnScriptHandler : MonoBehaviour {
             {
                 currentLevel = CalculateLevel();
                 if (currentLevel < 0 || currentLevel > maxDifficultyLevel) { throw new System.IndexOutOfRangeException("The currentLevel is not in the specified range!"); }
-                
-				foreach(SpawnScriptNode.Spawn spawn in spawnXml.nodes[nodeCounter].levels[currentLevel].spawns)
+
+                foreach (SpawnScriptNode.Spawn spawn in spawnXml.nodes[nodeCounter].levels[currentLevel].spawns)
                 {
                     //Debug.Log(spawn.enemy + " at " + spawn.spawnPoint);
                     EnemySpawner.spawn(enemyArray[spawn.enemy],spawnPointArray[spawn.spawnPoint].transform.position);
@@ -98,10 +98,10 @@ public class SpawnScriptHandler : MonoBehaviour {
 
     int CalculateLevel()
     {
-        if (!bountyBased) return maxDifficultyLevel / 2;
+        if (!bountyBased) return 1; //maxDifficultyLevel / 2;
 
-        var player = GameObject.FindGameObjectWithTag("Player");
-        var bscore = player.GetComponent<BountyScore>();
+        GameObject player = GameObject.FindWithTag("Player");
+        BountyScore bscore = player.GetComponent<BountyScore>();
 
         int currentBounty = bscore.currentBounty;
         int difference = currentBounty - previousBounty;
@@ -110,7 +110,6 @@ public class SpawnScriptHandler : MonoBehaviour {
         if (difference > 50) return maxDifficultyLevel;
         else if (difference > 20 && currentLevel < maxDifficultyLevel) return currentLevel + 1;
         else if (difference > 0) return currentLevel;
-
-        return currentLevel > 0 ? currentLevel - 1 : currentLevel;
+        else return currentLevel - 1;
     }
 }

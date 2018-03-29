@@ -12,6 +12,7 @@ public class EntityHealth : MonoBehaviour, DamageTaker
     public void takeDamage(int i)
     {
         HealthPoints -= i;
+        if (HealthPoints <= 0) { Destroy(this.gameObject); }
     }
 
     public void healDamage(int i)

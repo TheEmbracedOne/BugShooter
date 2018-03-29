@@ -16,13 +16,16 @@ public class BountyScore : MonoBehaviour, BountyTaker, DamageTaker
 
     public void takeDamage()
     {
-        if(currentBounty > 0)
+        takeDamage(1);
+    }
+
+    public void takeDamage(int dmg)
+    {
+        if (currentBounty > 0)
         {
-            currentBounty--;
-            string[] message = { "Lost 1 bounty", currentBounty.ToString(), "DiffLvl" + SpawnScriptHandler.currentLevel.ToString() };
+            currentBounty-= dmg;
+            string[] message = { "Lost " + dmg + " bounty", currentBounty.ToString(), "DiffLvl" + SpawnScriptHandler.currentLevel.ToString() };
             FileDump.LogData(message);
         }
     }
-
-
 }

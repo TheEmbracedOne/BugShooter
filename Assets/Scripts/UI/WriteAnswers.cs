@@ -15,7 +15,6 @@ public class WriteAnswers : MonoBehaviour {
     void Start()
     {
         questionnare = GetComponentInParent<Questionnare>();
-        this.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Submit);
         qText = this.GetComponentInParent<Question>().QuestionText;
     }
 
@@ -24,9 +23,15 @@ public class WriteAnswers : MonoBehaviour {
         aText = AnswerText.text;
     }
 
-    void Submit()
+    public void Submit()
     {
         questionnare.LogEntry(qText);
         questionnare.LogEntry(aText);
+    }
+
+    public void FinishSubmit()
+    {
+        Submit();
+        FlowController.instance.NextFlowState();
     }
 }

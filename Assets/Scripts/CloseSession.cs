@@ -4,8 +4,27 @@ using UnityEngine;
 
 public class CloseSession : MonoBehaviour {
 
-	void OnDisable()
+    private static CloseSession instance;
+
+    void Start()
     {
-        FileDump.CloseSessionFile();
+        if(instance == default(CloseSession))
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+	void OnDestroy()
+    {
+        if (instance == this)
+        {
+            Debug.Log("Destroying file dumper...");
+            FileDump.CloseSessionFile();
+        }
     }
 }

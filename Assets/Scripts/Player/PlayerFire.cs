@@ -6,8 +6,8 @@ public class PlayerFire : MonoBehaviour {
     public float fireRate;
     public float bulletSpeed;
     public GameObject shootAction;
-    public AudioClip BulletShootSound;
-    public AudioSource audioSrc;
+    //public AudioClip BulletShootSound;
+    //public AudioSource audioSrc;
 
     private float fireCounter;
     private ProjectileSpawner ps;

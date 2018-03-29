@@ -12,12 +12,9 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool movementState;
 
-    void OnDestroy()
+    void OnDisable()
     {
-        if (this.GetComponent<EntityHealth>().HealthPoints <= 0)
-        {
-            FileDump.CloseSession();
-        }
+        FileDump.CloseSession();
     }
 
     void Start () {
