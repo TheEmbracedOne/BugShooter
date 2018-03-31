@@ -14,12 +14,14 @@ public class SpawnScriptHandler : MonoBehaviour {
     private string path;
 	private float elapsedTime;
     private int nodeCounter;
-
+    private GameObject player;
     private int previousBounty;
     public bool bountyBased;
+    //public int difficultyLevel;
 
     void Start()
 	{
+        player = GameObject.FindWithTag("Player");
         currentLevel = 1;
         if(dataFileName.EndsWith(".xml"))
         {
@@ -28,88 +30,61 @@ public class SpawnScriptHandler : MonoBehaviour {
         }
 		elapsedTime = 0.0f;
         nodeCounter = 0;
-        previousBounty = GameObject.FindGameObjectWithTag("Player").GetComponent<BountyScore>().currentBounty;
+        previousBounty = player.GetComponent<BountyScore>().currentBounty;
         
     }
 
 	void Update()
 	{
-		elapsedTime += Time.deltaTime;
-		if (spawnXml.nodes.ToArray().Length > nodeCounter)
+        if(player != null)
         {
-			if (elapsedTime > spawnXml.nodes[nodeCounter].time)
+            elapsedTime += Time.deltaTime;
+            if (spawnXml.nodes.ToArray().Length > nodeCounter)
             {
-                currentLevel = CalculateLevel();
-                if (currentLevel < 0 || currentLevel > maxDifficultyLevel) { throw new System.IndexOutOfRangeException("The currentLevel is not in the specified range!"); }
-
-                foreach (SpawnScriptNode.Spawn spawn in spawnXml.nodes[nodeCounter].levels[currentLevel].spawns)
+                if (elapsedTime > spawnXml.nodes[nodeCounter].time)
                 {
-                    //Debug.Log(spawn.enemy + " at " + spawn.spawnPoint);
-                    EnemySpawner.spawn(enemyArray[spawn.enemy],spawnPointArray[spawn.spawnPoint].transform.position);
-				}
-                elapsedTime = 0.0f;
-                nodeCounter++;
-            }
-        }
-        else
-        {
-            this.GetComponent<EnemyQuery>().enabled = true;
-        }
+                    currentLevel = CalculateLevel();
+                    if (currentLevel < 0 || currentLevel > maxDifficultyLevel) { throw new System.IndexOutOfRangeException("The currentLevel is not in the specified range!"); }
 
-	}
-
-    /*    private int CalculateLevel()
-        {
-            if (bountyBased == false)
-            {
-                return (maxDifficultyLevel / 2);
-            }
-
-            int cBounty = GameObject.FindGameObjectWithTag("Player").GetComponent<BountyScore>().currentBounty;
-            //float cTime = spawnXml.nodes[nodeCounter].time;
-            int bountyDifference = cBounty - previousBounty; //pl. 20 - 17 = +3 bounty
-            previousBounty = cBounty;
-
-            //calculate dynamic difficulty quotient
-            //return (int)(bountyDifference / cTime);
-
-            //VeryHighSkill, max difficulty
-            if (bountyDifference > 50) {
-                return maxDifficultyLevel;
-            }
-            //HighSkill, +1 difficulty
-            if (bountyDifference > 20) {
-                if (currentLevel < maxDifficultyLevel) //need to ensure it does not exceed max difficulty
-                {
-                    return (currentLevel + 1);
+                    foreach (SpawnScriptNode.Spawn spawn in spawnXml.nodes[nodeCounter].levels[currentLevel].spawns)
+                    {
+                        Debug.Log(currentLevel);
+                        EnemySpawner.spawn(enemyArray[spawn.enemy], spawnPointArray[spawn.spawnPoint].transform.position);
+                    }
+                    elapsedTime = 0.0f;
+                    nodeCounter++;
                 }
             }
-            //NormalSkill, same difficulty
-            if (bountyDifference > 0) {   //between 0 and 20
-               return currentLevel;
-            }
-            //LowSkill, -1 difficulty
-            if (currentLevel > 0)
+            else
             {
-                return currentLevel - 1;  //need to ensure it does not go lower than min difficulty
+                this.GetComponent<EnemyQuery>().enabled = true;
             }
-            return currentLevel;
-        }*/
+        }
+	}
+
+    
 
     int CalculateLevel()
     {
-        if (!bountyBased) return 1; //maxDifficultyLevel / 2;
+        if (!bountyBased) return maxDifficultyLevel / 2; //maxDifficultyLevel / 2;
+        
+        if(player != null)
+        {
+            BountyScore bscore = player.GetComponent<BountyScore>();
 
-        GameObject player = GameObject.FindWithTag("Player");
-        BountyScore bscore = player.GetComponent<BountyScore>();
+            int currentBounty = bscore.currentBounty;
+            int difference = currentBounty - previousBounty;
+            previousBounty = currentBounty;
 
-        int currentBounty = bscore.currentBounty;
-        int difference = currentBounty - previousBounty;
-        previousBounty = currentBounty;
-
-        if (difference > 50) return maxDifficultyLevel;
-        else if (difference > 20 && currentLevel < maxDifficultyLevel) return currentLevel + 1;
-        else if (difference > 0) return currentLevel;
-        else return currentLevel - 1;
+            if (difference > 50) return maxDifficultyLevel;
+            else if (difference > 20 && currentLevel < maxDifficultyLevel) return currentLevel + 1;
+            else if (difference < 0 && currentLevel > 0) return currentLevel - 1;
+            else return currentLevel;
+        }
+        else
+        {
+            return 0;
+        }
+        
     }
 }

@@ -19,6 +19,7 @@ public class SpawnScriptTest : MonoBehaviour
     private int previousBounty;
     public bool bountyBased;
 
+
     void Start()
     {
         currentLevel = 1;

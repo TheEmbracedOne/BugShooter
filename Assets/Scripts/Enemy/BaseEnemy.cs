@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(EntityHealth))]
 public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
 {
+
     public float bulletSpeed;
     protected float fireCounter;
 
@@ -16,6 +17,8 @@ public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
 
     protected GameObject player;
     protected ProjectileSpawner ps;
+
+    
 
     // Use this for initialization
     void Start()
@@ -28,6 +31,7 @@ public abstract class BaseEnemy : MonoBehaviour, Enemy, DamageTaker
     // Update is called once per frame
     void Update()
     {
+
         Move();
         if (fireCounter >= (fireRate / 4) && fireCounter < fireRate)
         {

@@ -17,13 +17,18 @@ public class PlayerMovement : MonoBehaviour {
         FileDump.CloseSession();
     }
 
-    void Start () {
-        string isStatic = this.GetComponentInParent<SpawnScriptHandler>().bountyBased.ToString();
-        FileDump.OpenSession(isStatic);
+    void Awake()
+    {
         diagonalSpeed = Mathf.Sqrt(2) / 2 * speed;
     }
 
-    void Update () {
+    void Start () {
+        string isStatic = this.GetComponentInParent<SpawnScriptHandler>().bountyBased.ToString(); 
+        FileDump.OpenSession(isStatic);
+    }
+
+    void Update ()
+    {
         float horizontalSpeed = (Input.GetAxis("Horizontal") * (speed - Mathf.Abs(Input.GetAxis("Vertical")) * (speed - diagonalSpeed)));
         float verticalSpeed = (Input.GetAxis("Vertical") * (speed - Mathf.Abs(Input.GetAxis("Horizontal")) * (speed - diagonalSpeed)));
         

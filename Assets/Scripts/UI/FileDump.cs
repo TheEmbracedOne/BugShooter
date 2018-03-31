@@ -8,6 +8,7 @@ using System;
 
 public class FileDump : MonoBehaviour {
     private bool isSessionOpen;
+    private bool isSessionFileOpen;
     private const string idFileName = "id.txt";
     private string PlayerUniqueID;
     private StreamWriter SessionWriter;
@@ -36,7 +37,7 @@ public class FileDump : MonoBehaviour {
                 }
                 sw.Close();
             }
-
+            isSessionFileOpen = false;
             StreamReader idReader = new StreamReader(idFilePath, System.Text.Encoding.ASCII);
             PlayerUniqueID = idReader.ReadLine();
             
@@ -101,6 +102,7 @@ public class FileDump : MonoBehaviour {
         SessionWriter = new StreamWriter(sessionFileName, false, System.Text.Encoding.ASCII);
         sessionId = 1;
         SessionWriter.WriteLine("{\"Sessions\": {");
+        isSessionFileOpen = true;
     }
 
     public static void OpenSession(string isStaticLevel)
@@ -113,7 +115,11 @@ public class FileDump : MonoBehaviour {
         {
             throw new System.NotSupportedException("No SessionWriter in FileDump!");
         }
-        if(instance.sessionId > 1)
+        if (instance.isSessionFileOpen == false)
+        {
+            instance.CreateSessionFile();
+        }
+        if (instance.sessionId > 1)
         {
             instance.SessionWriter.WriteLine(",");
         }
@@ -157,5 +163,6 @@ public class FileDump : MonoBehaviour {
         instance.SessionWriter.WriteLine("}");
         instance.SessionWriter.Dispose();
         instance.SessionWriter.Close();
+        instance.isSessionFileOpen = false;
     }
 }

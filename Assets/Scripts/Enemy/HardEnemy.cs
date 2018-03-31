@@ -26,54 +26,65 @@ public class HardEnemy : BaseEnemy {
 
     public override void Move()
     {
-        Vector2 movement;
         //Keep the distance or move to designated position
-        if (Vector2.Distance(this.transform.position,player.transform.position) < minimumDistance)
+        if (player != null)
         {
-            movement = (this.transform.position - player.transform.position).normalized * speed;
-        }
-        else if (isDodging && dodgeTimer != 0.0f)
-        {
-            movement = this.GetComponent<Rigidbody2D>().velocity;
-            dodgeTimer += Time.deltaTime;
-            if (dodgeTimer > dodgingTime)
+            Vector2 movement;
+            if (Vector2.Distance(this.transform.position, player.transform.position) < minimumDistance)
             {
-                dodgeTimer = 0.0f;
-                isDodging = false;
+                movement = (this.transform.position - player.transform.position).normalized * speed;
             }
-        }
-        else if(isDodging && dodgeTimer == 0.0f)
-        {
-            Vector2 vectorToPlayer = (player.transform.position - this.transform.position).normalized;
-            
-            Vector2 dodgeLeft =  new Vector2(-vectorToPlayer.y, vectorToPlayer.x) * speed;
-            Vector2 dodgeRight = new Vector2(vectorToPlayer.y, -vectorToPlayer.x) * speed;
-            if (new System.Random().Next(1,100) <= 50)
-                movement = dodgeRight;
-            else
-                movement = dodgeLeft;
+            else if (isDodging && dodgeTimer != 0.0f)
+            {
+                movement = this.GetComponent<Rigidbody2D>().velocity;
+                dodgeTimer += Time.deltaTime;
+                if (dodgeTimer > dodgingTime)
+                {
+                    dodgeTimer = 0.0f;
+                    isDodging = false;
+                }
+            }
+            else if (isDodging && dodgeTimer == 0.0f)
+            {
+                Vector2 vectorToPlayer = (player.transform.position - this.transform.position).normalized;
 
-            dodgeTimer += Time.deltaTime;
-        }
-        else if(Vector2.Distance(this.transform.position, player.transform.position) > maximumDistance)
-        {
-            movement = (player.transform.position - this.transform.position).normalized * speed;
+                Vector2 dodgeLeft = new Vector2(-vectorToPlayer.y, vectorToPlayer.x) * speed;
+                Vector2 dodgeRight = new Vector2(vectorToPlayer.y, -vectorToPlayer.x) * speed;
+                if (new System.Random().Next(1, 100) <= 50)
+                    movement = dodgeRight;
+                else
+                    movement = dodgeLeft;
+
+                dodgeTimer += Time.deltaTime;
+            }
+            else if (Vector2.Distance(this.transform.position, player.transform.position) > maximumDistance)
+            {
+                movement = (player.transform.position - this.transform.position).normalized * speed;
+            }
+            else
+            {
+                movement = new Vector2(0, 0);
+            }
+            this.GetComponent<Rigidbody2D>().velocity = movement;
+            this.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+
+            float angle = Mathf.Atan2(player.transform.position.y - this.transform.position.y, player.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
         else
         {
-            movement = new Vector2(0,0);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(0 , 0);
+            this.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
         }
-        this.GetComponent<Rigidbody2D>().velocity = movement;
-        this.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
-
-        float angle = Mathf.Atan2(player.transform.position.y - this.transform.position.y, player.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     public override void Shoot()
     {
-        foreach (SpriteAction sa in shootAction.GetComponentsInChildren<SpriteAction>()) sa.SetState(true);
-        ps.Shoot(new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y).normalized, bulletSpeed, "EnemyBullet");
+        if(player != null)
+        {
+            foreach (SpriteAction sa in shootAction.GetComponentsInChildren<SpriteAction>()) sa.SetState(true);
+            ps.Shoot(new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y).normalized, bulletSpeed, "EnemyBullet");
+        }
     }
 
     private Vector2 GetPlayerDirection()
