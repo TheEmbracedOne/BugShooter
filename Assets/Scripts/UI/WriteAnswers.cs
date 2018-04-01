@@ -6,7 +6,7 @@ using System;
 
 public class WriteAnswers : MonoBehaviour {
 
-    public Text AnswerText;
+    public InputField AnswerText;
     private Questionnare questionnare;
 
     private string qText;
@@ -18,13 +18,9 @@ public class WriteAnswers : MonoBehaviour {
         qText = this.GetComponentInParent<Question>().QuestionText;
     }
 
-    void Update()
-    {
-        aText = AnswerText.text;
-    }
-
     public void Submit()
     {
+        aText = AnswerText.text;
         questionnare.LogEntry(qText);
         questionnare.LogEntry(aText);
     }
